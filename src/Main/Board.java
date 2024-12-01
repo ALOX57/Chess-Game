@@ -18,7 +18,7 @@ public class Board extends JPanel {
 
         for (int r = 0; r < rows; r++)
             for (int c = 0; c < rows; c++) {
-                g2d.setColor((c + r) % 2 == 0 ? Color.white : Color.black);
+                g2d.setColor((c + r) % 2 == 0 ? new Color(205, 189, 175) : new Color(114, 94, 76));
                 g2d.fillRect(c * tileSize, r * tileSize, tileSize, tileSize);
             }
 
