@@ -1,5 +1,13 @@
+import javax.swing.*;
+import java.awt.*;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello, GitHub!");
+
+        JFrame frame = new JFrame();
+        frame.setMinimumSize(new Dimension(1000,1000));
+        frame.setLocationRelativeTo(null);
+
+        frame.setVisible(true);
     }
 }
