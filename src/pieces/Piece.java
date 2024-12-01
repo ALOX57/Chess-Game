@@ -1,6 +1,6 @@
 package pieces;
 
-import Main.Board;
+import main.Board;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -8,8 +8,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Piece {
-
-
     public int col, row;
     public int xPos, yPos;
 
@@ -27,11 +25,11 @@ public class Piece {
 
 
     }
-
+    protected int sheetScale = sheet.getWidth() / 6;
     Image sprite;
     Board board;
 
-    public void Piece(Board board) {
+    public Piece(Board board) {
         this.board = board;
     }
 }
