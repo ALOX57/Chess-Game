@@ -10,6 +10,9 @@ public class Main {
         frame.setMinimumSize(new Dimension(1000,1000));
         frame.setLocationRelativeTo(null);
 
+        Board board = new Board();
+        frame.add(board);
+
         frame.setVisible(true);
     }
 }
