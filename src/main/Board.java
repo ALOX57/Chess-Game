@@ -32,6 +32,18 @@ public class Board extends JPanel {
         return null;
     }
 
+    public void makeMove(Move move) {
+        move.piece.col = move.newCol;
+        move.piece.row = move.newRow;
+        move.piece.xPos = move.newCol * tileSize;
+        move.piece.yPos = move.newRow * tileSize;
+    }
+
+    public boolean isValidMove(Move move) {
+
+        return true;
+    }
+
     public void addPieces() {
         pieceList.add(new Rook(this, 0, 0, false));
         pieceList.add(new Knight(this, 1, 0, false));
