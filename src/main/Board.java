@@ -14,6 +14,8 @@ public class Board extends JPanel {
 
     ArrayList<Piece> pieceList = new ArrayList<Piece>();
 
+    public Piece selectedPiece;
+
     public Board() {
         this.setPreferredSize(new Dimension(cols * tileSize, rows * tileSize));
         addPieces();
