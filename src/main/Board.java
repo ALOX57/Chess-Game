@@ -43,11 +43,23 @@ public class Board extends JPanel {
 
     public boolean isValidMove(Move move) {
 
+        if (sameTeam(move.piece, move.capture)) {
+            return false;
+        }
+
         return true;
     }
 
     public void capture(Move move) {
         pieceList.remove(move.capture);
+    }
+
+    public boolean sameTeam(Piece p1, Piece p2) {
+        if (p1 == null || p2 == null) {
+            return false;
+        }
+
+        return p1.isWhite == p2.isWhite;
     }
 
     public void addPieces() {
