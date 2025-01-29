@@ -19,6 +19,17 @@ public class Board extends JPanel {
         addPieces();
     }
 
+    public Piece getPiece(int col, int row) {
+
+        for (Piece piece : pieceList) {
+            if (piece.col == col && piece.row == row) {
+                return piece;
+            }
+        }
+
+        return null;
+    }
+
     public void addPieces() {
         pieceList.add(new Rook(this, 0, 0, false));
         pieceList.add(new Knight(this, 1, 0, false));
