@@ -19,4 +19,8 @@ public class Rook extends Piece{
                 .getScaledInstance(board.tileSize, board.tileSize, BufferedImage.SCALE_SMOOTH);
     }
 
+    public boolean isValidMovement(int col, int row) {
+        return this.col == col || this.row == row;
+    }
+
 }
