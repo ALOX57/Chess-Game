@@ -52,6 +52,9 @@ public class Board extends JPanel {
         if (sameTeam(move.piece, move.capture)) {
             return false;
         }
+        if (!move.piece.isValidMovement(move.newCol, move.newRow)) {
+            return false;
+        }
 
         return true;
     }
