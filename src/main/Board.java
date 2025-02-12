@@ -70,6 +70,12 @@ public class Board extends JPanel {
             enPassantTile = -1;
         }
 
+        // promotions
+        colorIndex = move.piece.isWhite ? 0 : 7;
+        if (move.newRow == colorIndex) {
+            promotePawn(move);
+        }
+
         move.piece.col = move.newCol;
         move.piece.row = move.newRow;
         move.piece.xPos = move.newCol * tileSize;
@@ -78,6 +84,11 @@ public class Board extends JPanel {
         move.piece.isFirstMove = false;
 
         capture(move);
+    }
+
+    private void promotePawn(Move move) {
+        pieceList.add(new Queen(this, move.newCol, move.newRow, move.piece.isWhite));
+        capture(move.capture);
     }
 
     public boolean isValidMove(Move move) {
@@ -95,8 +106,8 @@ public class Board extends JPanel {
         return true;
     }
 
-    public void capture(Move move) {
-        pieceList.remove(move.capture);
+    public void capture(Piece piece) {
+        pieceList.remove(piece);
     }
 
     public boolean sameTeam(Piece p1, Piece p2) {
