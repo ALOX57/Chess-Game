@@ -52,7 +52,7 @@ public class Board extends JPanel {
 
             move.piece.isFirstMove = false;
 
-            capture(move);
+            capture(move.capture);
         }
     }
 
@@ -83,12 +83,12 @@ public class Board extends JPanel {
 
         move.piece.isFirstMove = false;
 
-        capture(move);
+        capture(move.capture);
     }
 
     private void promotePawn(Move move) {
         pieceList.add(new Queen(this, move.newCol, move.newRow, move.piece.isWhite));
-        capture(move.capture);
+        capture(move.piece);
     }
 
     public boolean isValidMove(Move move) {
