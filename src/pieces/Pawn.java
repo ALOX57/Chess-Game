@@ -33,23 +33,31 @@ public class Pawn extends Piece{
             return true;
 
 
-        // capture left
-        if (col == this.col - 1 && row == this.row - colorIndex && board.getPiece(col, row) != null)
+//        // capture left
+//        if (col == this.col - 1 && row == this.row - colorIndex && board.getPiece(col, row) != null)
+//            return true;
+//
+//        // capture right
+//        if (col == this.col + 1 && row == this.row - colorIndex && board.getPiece(col, row) != null)
+//            return true;
+
+        // capture left or right
+        if (Math.abs(col - this.col) == 1 && row == this.row - colorIndex && board.getPiece(col, row) != null)
             return true;
 
-        // capture right
-        if (col == this.col + 1 && row == this.row - colorIndex && board.getPiece(col, row) != null)
-            return true;
+//        // en passant left
+//        if (board.getTileNum(col, row) == board.enPassantTile && col == this.col - 1 && row == this.row - colorIndex && board.getPiece(col, row + colorIndex) != null) {
+//            return true;
+//        }
+//
+//        // en passant right
+//        if (board.getTileNum(col, row) == board.enPassantTile && col == this.col + 1 && row == this.row - colorIndex && board.getPiece(col, row + colorIndex) != null) {
+//            return true;
+//        }
 
-        // en passant left
-        if (board.getTileNum(col, row) == board.enPassantTile && col == this.col - 1 && row == this.row - colorIndex && board.getPiece(col, row + colorIndex) != null) {
+        // en passant left or right
+        if (board.getTileNum(col, row) == board.enPassantTile && Math.abs(col - this.col) == 1 && row == this.row - colorIndex && board.getPiece(col, row + colorIndex) != null)
             return true;
-        }
-
-        // en passant right
-        if (board.getTileNum(col, row) == board.enPassantTile && col == this.col + 1 && row == this.row - colorIndex && board.getPiece(col, row + colorIndex) != null) {
-            return true;
-        }
 
         return false;
     }
