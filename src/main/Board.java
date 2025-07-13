@@ -18,6 +18,8 @@ public class Board extends JPanel {
 
     Input input = new Input(this);
 
+    CheckScanner checkScanner = new CheckScanner(this);
+
     public int enPassantTile = -1;
 
     public Board() {
@@ -100,6 +102,10 @@ public class Board extends JPanel {
             return false;
         }
         if (move.piece.moveCollidesWithPiece(move.newCol, move.newRow)) {
+            return false;
+        }
+
+        if (checkScanner.isKingChecked(move)) {
             return false;
         }
 
