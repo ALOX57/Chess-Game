@@ -42,4 +42,21 @@ public class CheckScanner {
         }
         return false;
     }
+
+    private boolean hitByBishop(int col, int row, Piece king, int kingCol, int kingRow, int colVal, int rowVal) {
+        for (int i = 1; i < 8; i++) {
+            if (kingCol - (i * colVal) == col && kingRow - (i * rowVal) == row) {
+                break;
+            }
+
+            Piece piece = board.getPiece(kingCol - (i * colVal), kingRow - (i * rowVal));
+            if (piece != null && piece != board.selectedPiece) {
+                if (!board.sameTeam(piece, king) && (piece.name.equals("Bishop") || piece.name.equals("Queen"))) {
+                    return true;
+                }
+                break;
+            }
+        }
+        return false;
+    }
 }
