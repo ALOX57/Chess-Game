@@ -59,4 +59,19 @@ public class CheckScanner {
         }
         return false;
     }
+
+    private boolean hitByKnight(int col, int row, Piece king, int kingCol, int kingRow) {
+        return checkKnight(board.getPiece(kingCol - 1, kingRow - 2), king, col, row) ||
+                checkKnight(board.getPiece(kingCol + 1, kingRow - 2), king, col, row) ||
+                checkKnight(board.getPiece(kingCol + 2, kingRow - 1), king, col, row) ||
+                checkKnight(board.getPiece(kingCol + 2, kingRow + 1), king, col, row) ||
+                checkKnight(board.getPiece(kingCol + 1, kingRow + 2), king, col, row) ||
+                checkKnight(board.getPiece(kingCol - 1, kingRow + 2), king, col, row) ||
+                checkKnight(board.getPiece(kingCol - 2, kingRow + 1), king, col, row) ||
+                checkKnight(board.getPiece(kingCol - 1, kingRow - 1), king, col, row);
+    }
+
+    private boolean checkKnight(Piece p, Piece k, int col, int row) {
+        return p != null && !board.sameTeam(p, k) && p.name.equals("Knight") && !(p.col == col && p.row == row);
+    }
 }
