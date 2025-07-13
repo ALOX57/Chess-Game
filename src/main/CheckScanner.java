@@ -61,7 +61,7 @@ public class CheckScanner {
     }
 
     private boolean hitByKnight(int col, int row, Piece king, int kingCol, int kingRow) {
-        return checkKnight(board.getPiece(kingCol - 1, kingRow - 2), king, col, row) ||
+        return  checkKnight(board.getPiece(kingCol - 1, kingRow - 2), king, col, row) ||
                 checkKnight(board.getPiece(kingCol + 1, kingRow - 2), king, col, row) ||
                 checkKnight(board.getPiece(kingCol + 2, kingRow - 1), king, col, row) ||
                 checkKnight(board.getPiece(kingCol + 2, kingRow + 1), king, col, row) ||
@@ -73,5 +73,20 @@ public class CheckScanner {
 
     private boolean checkKnight(Piece p, Piece k, int col, int row) {
         return p != null && !board.sameTeam(p, k) && p.name.equals("Knight") && !(p.col == col && p.row == row);
+    }
+
+    private boolean hitByKing(Piece king, int kingCol, int kingRow) {
+        return  checkKing(board.getPiece(kingCol - 1, kingRow - 1), king) ||
+                checkKing(board.getPiece(kingCol + 1, kingRow - 1), king) ||
+                checkKing(board.getPiece(kingCol, kingRow - 1), king) ||
+                checkKing(board.getPiece(kingCol - 1, kingRow), king) ||
+                checkKing(board.getPiece(kingCol + 1, kingRow), king) ||
+                checkKing(board.getPiece(kingCol - 1, kingRow + 1), king) ||
+                checkKing(board.getPiece(kingCol + 1, kingRow + 1), king) ||
+                checkKing(board.getPiece(kingCol, kingRow + 1), king);
+    }
+
+    private boolean checkKing(Piece p, Piece k) {
+        return p != null && !board.sameTeam(p, k) && p.name.equals("King");
     }
 }
