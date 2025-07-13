@@ -122,6 +122,15 @@ public class Board extends JPanel {
         return row * rows + col;
     }
 
+    Piece findKing(boolean isWhite) {
+        for (Piece piece : pieceList) {
+            if (isWhite == piece.isWhite && piece.name.equals("King")) {
+                return piece;
+            }
+        }
+        return null;
+    }
+
     public void addPieces() {
         pieceList.add(new Rook(this, 0, 0, false));
         pieceList.add(new Knight(this, 1, 0, false));
