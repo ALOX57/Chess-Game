@@ -23,7 +23,19 @@ public class CheckScanner {
             kingRow = move.newRow;
         }
 
-        return false;
+        return  hitByRook(move.newCol, move.newRow, king, kingCol, kingRow, 0, 1) || // up
+                hitByRook(move.newCol, move.newRow, king, kingCol, kingRow, 1, 0) || // right
+                hitByRook(move.newCol, move.newRow, king, kingCol, kingRow, 0, -1) || //down
+                hitByRook(move.newCol, move.newRow, king, kingCol, kingRow, -1, 0) || // left
+
+                hitByBishop(move.newCol, move.newRow, king, kingCol, kingRow, -1, -1) || //up-left
+                hitByBishop(move.newCol, move.newRow, king, kingCol, kingRow, 1, -1) || //up-right
+                hitByBishop(move.newCol, move.newRow, king, kingCol, kingRow, 1, 1) || //down-right
+                hitByBishop(move.newCol, move.newRow, king, kingCol, kingRow, -1, 1) || //down-left
+
+                hitByKnight(move.newCol, move.newRow, king, kingCol, kingRow) ||
+                hitByPawn(move.newCol, move.newRow, king, kingCol, kingRow) ||
+                hitByKing(king, kingCol, kingRow);
     }
 
     private boolean hitByRook(int col, int row, Piece king, int kingCol, int kingRow, int colVal, int rowVal) {
@@ -88,5 +100,15 @@ public class CheckScanner {
 
     private boolean checkKing(Piece p, Piece k) {
         return p != null && !board.sameTeam(p, k) && p.name.equals("King");
+    }
+
+    private boolean hitByPawn(int col, int row, Piece king, int kingCol, int kingRow) {
+        int colorVal = king.isWhite ? -1 : 1;
+        return checkPawn(board.getPiece(kingCol + 1, kingRow +colorVal), king, col, row) ||
+                checkPawn(board.getPiece(kingCol - 1, kingRow +colorVal), king, col, row);
+    }
+
+    private boolean checkPawn(Piece p, Piece k, int col, int row) {
+        return p != null && !board.sameTeam(p, k) && p.name.equals("Pawn") && !(p.col == col && p.row == row);
     }
 }
