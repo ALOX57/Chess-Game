@@ -18,7 +18,7 @@ public class Board extends JPanel {
 
     Input input = new Input(this);
 
-    CheckScanner checkScanner = new CheckScanner(this);
+    public CheckScanner checkScanner = new CheckScanner(this);
 
     public int enPassantTile = -1;
 
