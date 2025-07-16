@@ -5,6 +5,7 @@ import pieces.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class Board extends JPanel {
     public int tileSize = 85;
@@ -204,6 +205,16 @@ public class Board extends JPanel {
                 System.out.println("Stalemate!");
             }
         }
+    }
+    private boolean insufficientMaterial(boolean isWhite) {
+        ArrayList<String> names = pieceList.stream()
+                .filter(p -> p.isWhite == isWhite)
+                .map(p -> p.name)
+                .collect(Collectors.toCollection(ArrayList::new));
+        if (names.contains("Queen") || names.contains("Pawn") || names.contains("Rook"))) {
+            return false;
+        }
+        return names.size() < 3;
     }
 
     public void paintComponent(Graphics g) {
