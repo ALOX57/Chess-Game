@@ -22,6 +22,9 @@ public class Board extends JPanel {
 
     public int enPassantTile = -1;
 
+    private boolean isWhiteToMove = true;
+    private boolean isGameOver = false;
+
     public Board() {
         this.setPreferredSize(new Dimension(cols * tileSize, rows * tileSize));
 
@@ -57,6 +60,10 @@ public class Board extends JPanel {
             move.piece.isFirstMove = false;
 
             capture(move.capture);
+
+            isWhiteToMove = !isWhiteToMove;
+
+            updateGameState();
     }
 
     private void moveKing(Move move) {
