@@ -107,6 +107,13 @@ public class Board extends JPanel {
     }
 
     public boolean isValidMove(Move move) {
+        if(isGameOver) {
+            return false;
+        }
+        if(move.piece.isWhite != isWhiteToMove) {
+            return false;
+        }
+
 
         if (sameTeam(move.piece, move.capture)) {
             return false;
@@ -186,6 +193,17 @@ public class Board extends JPanel {
         pieceList.add(new Bishop(this, 5, 7, true));
         pieceList.add(new Knight(this, 6, 7, true));
         pieceList.add(new Rook(this, 7, 7, true));
+    }
+
+    private void updateGameState() {
+        Piece king = findKing(isWhiteToMove);
+        if (checkScanner.isGameOver(king)) {
+            if (checkScanner.isKingChecked(new Move(this, king, king.col, king.row))) {
+                System.out.println(isWhiteToMove ? "Black Wins!" : "White Wins!");
+            } else {
+                System.out.println("Stalemate!");
+            }
+        }
     }
 
     public void paintComponent(Graphics g) {
