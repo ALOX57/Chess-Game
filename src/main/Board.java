@@ -52,7 +52,10 @@ public class Board extends JPanel {
 
         if (move.piece.name.equals("Pawn")) {
             movePawn(move);
-        } else if (move.piece.name.equals("King")){
+        } else {
+            enPassantTile = -1;
+        }
+        if (move.piece.name.equals("King")){
             moveKing(move);
         }
             move.piece.col = move.newCol;
@@ -165,6 +168,71 @@ public class Board extends JPanel {
         String[] parts = fenString.split(" ");
 
         // set up pieces
+        String position = parts[0];
+        int row = 0;
+        int col = 0;
+        for (int i = 0; i < position.length(); i++){
+            char ch = position.charAt(i);
+            if (ch == '/') {
+                row++;
+                col = 0;
+            } else if (Character.isDigit(ch)) {
+                col += Character.getNumericValue(ch);
+            } else {
+                boolean isWhite = Character.isUpperCase(ch);
+                char pieceChar = Character.toLowerCase(ch);
+
+                switch (pieceChar) {
+                    case 'r':
+                        pieceList.add(new Rook(this, col, row, isWhite));
+                        break;
+                    case 'n':
+                        pieceList.add(new Knight(this, col, row, isWhite));
+                        break;
+                    case 'b':
+                        pieceList.add(new Bishop(this, col, row, isWhite));
+                        break;
+                    case 'q':
+                        pieceList.add(new Queen(this, col, row, isWhite));
+                        break;
+                    case 'k':
+                        pieceList.add(new King(this, col, row, isWhite));
+                        break;
+                    case 'p':
+                        pieceList.add(new Pawn(this, col, row, isWhite));
+                        break;
+                }
+                col++;
+            }
+        }
+
+        // color to move
+        isWhiteToMove = parts[1].equals("w");
+
+        // castling
+        Piece bqr = getPiece(0, 0);
+        if (bqr instanceof Rook) {
+            bqr.isFirstMove = parts[2].contains("q");
+        }
+        Piece bkr = getPiece(7, 0);
+        if (bkr instanceof Rook) {
+            bkr.isFirstMove = parts[2].contains("k");
+        }
+        Piece wqr = getPiece(0, 7);
+        if (bqr instanceof Rook) {
+            bqr.isFirstMove = parts[2].contains("Q");
+        }
+        Piece wkr = getPiece(7, 7);
+        if (bkr instanceof Rook) {
+            bkr.isFirstMove = parts[2].contains("K");
+        }
+
+        // en passant square
+        if (parts[3].equals("-")) {
+            enPassantTile = -1;
+        } else {
+            enPassantTile = (7 - (parts[3].charAt(1) - '1')) * 8 + (parts[3].charAt(0) - 'a');
+        }
     }
 
     private void updateGameState() {
