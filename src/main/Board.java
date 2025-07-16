@@ -204,6 +204,10 @@ public class Board extends JPanel {
             } else {
                 System.out.println("Stalemate!");
             }
+            isGameOver = true;
+        } else if (insufficientMaterial(true) && insufficientMaterial(false)) {
+            System.out.println("Insufficient Material!");
+            isGameOver = true;
         }
     }
     private boolean insufficientMaterial(boolean isWhite) {
